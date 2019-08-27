@@ -9,19 +9,14 @@ int fibonacciWithRecursion(int n)
         return (fibonacciWithRecursion(n - 1) + fibonacciWithRecursion(n - 2));
 }
 
-static long fibonacciWithLoopRes[2];
-
 EMSCRIPTEN_KEEPALIVE
-void fibonacciWithLoop(int n)
+int fibonacciWithLoop(int n)
 {
-    fibonacciWithLoopRes[0] = 0;
-    fibonacciWithLoopRes[1] = n;
-
     if (n > 1)
     {
-        long long int last = 0;
-        long long int current = 1;
-        long long int temp;
+        int last = 0;
+        int current = 1;
+        int temp;
 
         for (int idx = 2; idx <= n; idx++)
         {
@@ -30,19 +25,10 @@ void fibonacciWithLoop(int n)
             last = temp;
         }
 
-        fibonacciWithLoopRes[0] = current >> 32;
-        fibonacciWithLoopRes[1] = current & 0xFFFFFFFF;
+        return current;
     }
-}
-
-EMSCRIPTEN_KEEPALIVE
-long getResMs()
-{
-    return fibonacciWithLoopRes[0];
-}
-
-EMSCRIPTEN_KEEPALIVE
-long getResLs()
-{
-    return fibonacciWithLoopRes[1];
+    else
+    {
+        return n;
+    }
 }

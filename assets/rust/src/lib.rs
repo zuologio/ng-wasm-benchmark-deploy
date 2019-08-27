@@ -28,9 +28,9 @@ pub fn fibonacci_with_recursion(index: i32) -> i32 {
 }
 
 #[wasm_bindgen]
-pub fn fibonacci_with_loop(index: i32) -> i64 {
+pub fn fibonacci_with_loop(index: i32) -> i32 {
     if index <= 1 {
-        index as i64
+        index as i32
     } else {
 
         let mut last = 0;
